@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <title>Device Width Only | Viewport Test</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+      body {
+        background: red;
+      }
+
+      @media (min-width: 410px) {
+        body {
+          background: green;
+        }
+      }
+
+      pre {
+        background: #cde;
+        padding: .5em;
+
+        overflow: auto;
+      }
+      @-ms-viewport {
+        zoom: 1;
+      }
+      @-o-viewport {
+        zoom: 1;
+      }
+      @viewport {
+        zoom: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Device Width Only</h1>
+    <pre><code class="language-markdown">&lt;meta name="viewport" content="width=device-width"&gt;</code></pre>
+    <pre><code class="language-css">@viewport {
+  width: device-width;
+}</code></pre>
+    <pre><code class="language-css">body {
+  background: red;
+}
+
+@media (min-width: 410px) {
+  body {
+    background: green;
+  }
+}</code></pre>
+  <pre id="width"></pre>
+  <nav>
+    <a href="index.html">Initial Scale Only</a>
+    <a href="width-is.html">Device Width plus Initial Scale</a>
+    <a href="width.html">Device Width Only</a>
+  </nav>
+  <script>
+    var width = document.getElementById('width');
+    width.textContent = window.innerWidth;
+
+    window.onload = function() {
+      writeWidth();
+    }
+    window.onresize = function() {
+      writeWidth();
+    }
+
+    function writeWidth() {
+      width.textContent = window.innerWidth;
+    }
+  </script>
+  </body>
+</html>
