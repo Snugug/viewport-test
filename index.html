@@ -13,6 +13,10 @@
         }
       }
 
+      .hidden {
+        display: none;
+      }
+
       pre {
         background: #cde;
         padding: .5em;
@@ -44,6 +48,7 @@
   }
 }</code></pre>
   <pre id="width"></pre>
+  <pre id="dpr"></pre>
   <nav>
     <a href="index.html">No Viewport Tag</a>
     <a href="is.html">Initial Scale Only</a>
@@ -51,19 +56,35 @@
     <a href="width.html">Device Width Only</a>
   </nav>
   <script>
-    var width = document.getElementById('width');
-    width.textContent = window.innerWidth;
+    (function() {
+      var width = document.getElementById('width');
+      var dpr = document.getElementById('dpr');
 
-    window.onload = function() {
-      writeWidth();
-    }
-    window.onresize = function() {
-      writeWidth();
-    }
+      var hasDPR = false;
+      if (window.devicePixelRatio !== undefined) {
+        hasDPR = true;
+      }
+      else {
+        dpr.className = 'hidden';
+      }
 
-    function writeWidth() {
       width.textContent = window.innerWidth;
-    }
+
+      window.onload = function() {
+        writeViewport();
+      }
+      window.onresize = function() {
+        writeViewport();
+      }
+
+      function writeViewport() {
+        width.textContent = 'width: ' + window.innerWidth + 'px';
+        console.log(hasDPR);
+        if (hasDPR) {
+          dpr.textContent = 'dpr: ' + window.devicePixelRatio;
+        }
+      }
+    })();
   </script>
   </body>
 </html>
